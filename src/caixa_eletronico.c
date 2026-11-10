@@ -440,10 +440,7 @@ void menu_cliente(struct Conta *c, struct Conta contas[], int total, int cedulas
         printf("1 - Consultar saldo\n2 - Sacar\n3 - Depositar\n");
         printf("4 - Transferir\n5 - Extrato\n0 - Sair\n");
          if (!ler_inteiro("Opcao: ", &opcao)) {
-       if (feof(stdin)) break;   /* fim da entrada: sai em vez de repetir o menu */
-       opcao = -1;
-       continue;
-   }
+          if (!ler_inteiro("Opcao: ", &opcao)) { opcao = -1; continue; }
 
         switch (opcao) {
             case 1: printf("Saldo: R$ %.2f\n", c->saldo); break;
@@ -529,10 +526,7 @@ void menu_admin(struct Conta contas[], int *total, int cedulas[2][NUM_NOTAS]) {
         printf("1 - Relatorio de contas por saldo\n2 - Estoque de cedulas\n");
         printf("3 - Cadastrar conta\n4 - Reabastecer cedulas\n0 - Voltar\n");
           if (!ler_inteiro("Opcao: ", &opcao)) {
-       if (feof(stdin)) break;   /* fim da entrada: sai em vez de repetir o menu */
-       opcao = -1;
-       continue;
-   }
+         if (!ler_inteiro("Opcao: ", &opcao)) { opcao = -1; continue; }
 
         switch (opcao) {
             case 1: relatorio_contas(contas, *total); break;
