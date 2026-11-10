@@ -94,7 +94,13 @@ rodar "2\n9999\n3\n2000\n5555\nMaria Teste\n1\n0\n0\n"
 conferir "cadastro de conta" "Conta 2000 criada para Maria Teste"
 rodar "2\n9999\n2\n0\n0\n"
 conferir "estoque inicial de cedulas" "Total no caixa: R\$ 1850"
-
+   echo "== Robustez =="
+   PASTA="$(mktemp -d)"
+   if (cd "$PASTA" && printf "1\n1001\n1234\n" | timeout 5 "$BIN" > /dev/null 2>&1); then
+       echo "  [OK]    fim da entrada no menu nao trava o programa"; PASSOU=$((PASSOU + 1))
+   else
+       echo "  [FALHA] programa travou quando a entrada acabou no menu"; FALHOU=$((FALHOU + 1))
+   fi
 echo
 echo "Resultado: $PASSOU passaram, $FALHOU falharam."
 [ "$FALHOU" -eq 0 ]
