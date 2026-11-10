@@ -1,5 +1,6 @@
 # Caixa Eletrônico em C
 
+![CI](https://github.com/vitoriaapassis/caixa-eletronico-c/actions/workflows/ci.yml/badge.svg)
 
 Simulador de caixa eletrônico em linguagem C, executado no terminal. O projeto nasceu como um
 exercício simples (um saque com contagem de cédulas) e evoluiu para um sistema com várias contas,
