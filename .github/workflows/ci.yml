@@ -1,6 +1,5 @@
 name: CI
 
-# Quando o workflow roda (o "evento"):
 on:
   push:
     branches: [main]
@@ -9,7 +8,6 @@ on:
     types: [published]
 
 jobs:
-  # 1) test: compila com todos os warnings como erro e roda os testes
   test:
     runs-on: ubuntu-latest
     steps:
@@ -19,20 +17,18 @@ jobs:
       - name: Rodar testes automaticos
         run: bash tests/run_tests.sh
 
-  # 2) build: gera o executavel e guarda como artefato
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Compilar executavel
-                  run: gcc -Wall -Wextra -Werror -o caixa src/caixa_eletronico.c
+        run: gcc -Wall -Wextra -Werror -o caixa src/caixa_eletronico.c
       - uses: actions/upload-artifact@v4
         with:
           name: caixa-linux
           path: caixa
 
-  # 3) release: so roda quando uma Release e publicada; anexa o executavel nela
   release:
     needs: build
     if: github.event_name == 'release'
